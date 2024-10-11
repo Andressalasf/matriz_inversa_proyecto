@@ -1,8 +1,13 @@
+# ------------------------------------------------- Importación de bibliotecas ------------------------------------------------------------- #
+
 import tkinter as tk  # Importar la biblioteca de interfaz gráfica de usuario de Python
 from tkinter import ttk, messagebox  # Importar elementos adicionales de tkinter
 import numpy as np  # Biblioteca para manejo de matrices y operaciones numéricas
 from fractions import Fraction  # Para manejar fracciones en las entradas de la matriz
-import os
+from PIL import ImageTk, Image
+
+
+# ------------------------------------------------- Codigo de las funciones del programa ---------------------------------------------------- #
 
 # Función para calcular la matriz inversa utilizando el método Gauss-Jordan
 def gauss_jordan_inversa(matriz, pasos_frame):
@@ -143,7 +148,8 @@ def volver_inicio():
 def ver_manual():
     notebook.select(tab_manual)  # Cambiar la vista a la pestaña "Manual de Usuario"
 
-# Configurar la ventana principal de la aplicación
+# ------------------------------Configurar la ventana principal de la aplicación ------------------------------------------------------- #
+
 ventana = tk.Tk()
 ventana.title("Calculadora de Matriz Inversa - Método Gauss-Jordan")  # Título de la ventana principal
 ventana.geometry("800x700")  # Tamaño inicial de la ventana
@@ -200,7 +206,7 @@ btn_ver_manual = tk.Button(tab_principal, text="Ver manual de usuario", command=
 btn_ver_manual.pack(pady=30)  # Colocar el botón en la parte superior
 
 
-# *** CODIGO PARA LA PESTAÑA DE PASOS *** #
+# ----------------------------------- CODIGO PARA LA PESTAÑA DE PASOS------------------------------------------------------------------------- #
 
 # Crear la pestaña para mostrar los pasos con un diseño mejorado
 tab_pasos = tk.Frame(notebook, bg='#1b263b')  # Fondo oscuro para la pestaña de pasos
@@ -232,7 +238,7 @@ scrollbar.pack(side="right", fill="y", padx=10)
 # Frame dentro del canvas para los pasos
 pasos_frame = scrollable_frame
 
- # *** CODIGO PARA LA PESTAÑA DE MANUAL DE USUARIO *** #
+ # ------------------------------------------- CODIGO PARA LA PESTAÑA DE MANUAL DE USUARIO ------------------------------------------------------------ #
  
 # Crear la pestaña del manual de usuario
 tab_manual = tk.Frame(notebook, bg='#1b263b')  # Fondo oscuro similar a la pestaña "Pasos"
@@ -265,7 +271,7 @@ scrollbar_manual.pack(side="right", fill="y", padx=10)
 # Frame dentro del canvas para las instrucciones del manual
 instrucciones_frame = scrollable_frame_manual
 
- # *** CONTENIDO DEL MANUAL *** #
+ # ------------------------------------------------------ CONTENIDO DEL MANUAL -------------------------------------------------------------------- #
  
 # Título del Manual
 titulo_manual = ttk.Label(instrucciones_frame, text="Manual de Usuario", font=("Arial", 20, "bold"))
@@ -287,10 +293,19 @@ seccion2_contenido = ttk.Label(instrucciones_frame, text="""Antes de usar la cal
                                
 -Tener instalado: Python 3.7 o superior.
 
--Agregar Bibliotecas: tkinter, numpy, fractions. En este caso la biblioteca numpy se debe descargar""", wraplength=800, justify="left", font=("Arial", 12))
+-Agregar Bibliotecas: tkinter, numpy, Fractions, Pillow. En este caso la biblioteca numpy y Pillow se deben descargar primero""", wraplength=800, justify="left", font=("Arial", 12))
 seccion2_contenido.pack(anchor="w", padx=40, pady=10)
 
-# Crear secciones con instrucciones 
+# Crear secciones con instrucciones con imagenes
+
+# Generar las imagenes para mostrar las instrucciones
+
+img1 = ImageTk.PhotoImage(Image.open('paso1.png'))
+img2 = ImageTk.PhotoImage(Image.open('paso2.png'))
+img3 = ImageTk.PhotoImage(Image.open('paso3.png'))
+img4 = ImageTk.PhotoImage(Image.open('paso4.png'))
+img5 = ImageTk.PhotoImage(Image.open('paso5.png'))
+img6 = ImageTk.PhotoImage(Image.open('paso6.png'))
 
 # Instrucción 1: Ingresar el tamaño de la matriz
 label_instruccion1 = tk.Label(instrucciones_frame, text="Paso 1: Ingresar el tamaño de la matriz",
@@ -302,6 +317,10 @@ descripcion_instruccion1 = tk.Label(instrucciones_frame, text="En la pestaña pr
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion1.pack(anchor="w", padx=20, pady=5)
 
+#Imagen descriptiva 1
+label_imagen1 = tk.Label(instrucciones_frame, image=img1, bg='#f8f9fa')
+label_imagen1.pack(anchor="w", padx=20, pady=10)
+
 # Instrucción 2: Generar la matriz
 label_instruccion2 = tk.Label(instrucciones_frame, text="Paso 2: Generar la matriz",
                               font=("Arial", 14, "bold"), bg='#f8f9fa', fg='#1b263b')
@@ -311,6 +330,10 @@ descripcion_instruccion2 = tk.Label(instrucciones_frame, text="Presione el botó
                                                               "Aparecerán campos vacíos donde podrá ingresar los elementos de la matriz.",
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion2.pack(anchor="w", padx=20, pady=5)
+
+#Imagen descriptiva 2
+label_imagen2 = tk.Label(instrucciones_frame, image=img2, bg='#f8f9fa')
+label_imagen2.pack(anchor="w", padx=20, pady=10)
 
 # Instrucción 3: Ingresar los valores de la matriz
 label_instruccion3 = tk.Label(instrucciones_frame, text="Paso 3: Ingresar los valores de la matriz",
@@ -322,6 +345,9 @@ descripcion_instruccion3 = tk.Label(instrucciones_frame, text="Ingrese los valor
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion3.pack(anchor="w", padx=20, pady=5)
 
+#Imagen descriptiva 3
+label_imagen3 = tk.Label(instrucciones_frame, image=img3, bg='#f8f9fa')
+label_imagen3.pack(anchor="w", padx=20, pady=10)
 
 # Instrucción 4: Calcular la inversa de la matriz
 label_instruccion4 = tk.Label(instrucciones_frame, text="Paso 4: Calcular la inversa de la matriz",
@@ -333,6 +359,10 @@ descripcion_instruccion4 = tk.Label(instrucciones_frame, text="Presione el botó
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion4.pack(anchor="w", padx=20, pady=5)
 
+#Imagen descriptiva 4
+label_imagen4 = tk.Label(instrucciones_frame, image=img4, bg='#f8f9fa')
+label_imagen4.pack(anchor="w", padx=20, pady=10)
+
 # Instrucción 5: Visualizar los pasos
 label_instruccion5 = tk.Label(instrucciones_frame, text="Paso 5: Visualizar los pasos del cálculo",
                               font=("Arial", 14, "bold"), bg='#f8f9fa', fg='#1b263b')
@@ -343,6 +373,10 @@ Al presionarlo, se abrirá una nueva pestaña que muestra la matriz inicial y ca
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion5.pack(anchor="w", padx=20, pady=5)
 
+#Imagen descriptiva 5
+label_imagen5 = tk.Label(instrucciones_frame, image=img5, bg='#f8f9fa')
+label_imagen5.pack(anchor="w", padx=20, pady=10)
+
 # Instrucción 6: Limpieza de datos
 label_instruccion5 = tk.Label(instrucciones_frame, text="Paso 6: Limpiar datos",
                               font=("Arial", 14, "bold"), bg='#f8f9fa', fg='#1b263b')
@@ -352,8 +386,9 @@ descripcion_instruccion5 = tk.Label(instrucciones_frame, text="Utilice el botón
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion5.pack(anchor="w", padx=20, pady=5)
 
-
-# ----------------------------------------------------------------------------------------#
+#Imagen descriptiva 6
+label_imagen6 = tk.Label(instrucciones_frame, image=img6, bg='#f8f9fa')
+label_imagen6.pack(anchor="w", padx=20, pady=10)
 
 # Sección 4: Restricciones
 seccion4_titulo = ttk.Label(instrucciones_frame, text="4. Restricciones y Comportamiento del Programa", font=("Arial", 16, "bold"))
@@ -376,24 +411,36 @@ seccion4_contenido.pack(anchor="w", padx=40, pady=10)
 # Sección 5: Funcionalidad del programa
 seccion4_titulo = ttk.Label(instrucciones_frame, text="5.Comportamiento del Programa", font=("Arial", 16, "bold"))
 seccion4_titulo.pack(anchor="w", padx=20, pady=10)
+descripcion = tk.Label(instrucciones_frame, text="Esta sección describe el proceso y el método utilizado por el programa para calcular la inversa de matrices cuadradas, detallando cómo el algoritmo implementado opera para obtener el resultado.",
+                                    font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
+descripcion.pack(anchor="w", padx=20, pady=5)
+seccion4_contenido = ttk.Label(instrucciones_frame, text="""6.1. Ingreso del Tamaño de la Matriz
+El usuario comienza ingresando el tamaño de la matriz. El tamaño debe ser mayor que 1, ya que las matrices de dimensión 1x1 no se pueden invertir de manera práctica. El programa valida que el tamaño ingresado sea correcto y que se pueda crear una matriz con ese valor.
 
-seccion4_contenido = ttk.Label(instrucciones_frame, text="""-Este programa permite calcular la inversa de matrices cuadradas mediante el método de eliminación de Gauss-Jordan. A continuación, se describen los pasos clave del proceso:
+6.2. Generación de la Matriz
+Después de ingresar el tamaño, el programa genera un conjunto de campos de entrada donde el usuario puede ingresar cada elemento de la matriz manualmente. Los valores deben ser numéricos, y no se permiten valores complejos. Si el valor ingresado es menor que 0.00001, se establece automáticamente en 0.0000. Esto evita errores en el cálculo y garantiza una mayor estabilidad en el procesamiento.
 
--Ingreso del Tamaño de la Matriz: El usuario inicia ingresando el tamaño de la matriz cuadrada. 
+6.3. Verificación del Determinante
+El cálculo de la inversa depende del determinante de la matriz. Si el determinante es 0, la matriz no tiene inversa. El programa realiza esta verificación antes de continuar con los cálculos.
 
--Generación de la Matriz: Después de especificar el tamaño, se generan campos de entrada donde el usuario puede ingresar los elementos de la matriz. 
+6.4. Método de Gauss-Jordan
+Si la matriz es invertible, el programa aplica el método de Gauss-Jordan. Este método consiste en formar una matriz extendida [A | I], donde A es la matriz ingresada e I es la matriz identidad del mismo tamaño. Los pasos son los siguientes:
 
--Cálculo de la Inversa: Al presionar el botón para calcular la inversa, el programa realiza las siguientes acciones:
+---Selección del Pivote: Se elige el elemento de mayor valor absoluto en la columna actual como pivote. Si es necesario, se intercambian filas para colocar el mejor pivote en la posición correcta.
 
--Determinante: Se calcula el determinante de la matriz. Si el determinante es cero, el programa indica que la matriz no tiene inversa.
+---Normalización de la Fila: La fila que contiene el pivote se divide por el valor del pivote para que el elemento pivote se convierta en 1.
 
--Matriz Extendida: Si el determinante no es cero, se forma una matriz extendida, combinando la matriz original con la matriz identidad. Se aplica el método de eliminación de Gauss-Jordan usando pivoteo parcial cambiando de filas para evitar una division por un valor cercano al cero. Esto se hace asi hasta transformar la matriz de la parte izquierda en matriz identidad dando como resultado que la matriz de la derecha es la inversa de la matriz dada.
+---Eliminación hacia Ceros: Se ajustan las otras filas para que todos los elementos en la columna del pivote sean cero, dejando solo un 1 en la fila del pivote.
 
--Presentación del Resultado: Una vez calculada la inversa, se muestra al usuario en la pestaña de 'pasos', en la que se muestra el paso a paso del procedimiento.
+---Repetición: Estos pasos se repiten para cada columna hasta que la matriz A se convierte en la matriz identidad, y I se transforma en A^-1, que es la inversa de la matriz original.
+
+6.5. Presentación de Resultados
+Una vez que se encuentra la inversa, se muestra al usuario en la interfaz especificamente en la pestaña 'pasos'. El programa resalta cada paso, incluyendo los intercambios de filas y las operaciones realizadas, facilitando la comprensión del proceso de cálculo.
  
 """, wraplength=800, justify="left", font=("Arial", 12))
 seccion4_contenido.pack(anchor="w", padx=40, pady=10)
 
+# ------------------------------------------------------------------------------------------------------------------------------------------------ #
 
 # Iniciar la ventana principal y la interfaz gráfica
 ventana.mainloop()

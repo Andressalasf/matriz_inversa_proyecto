@@ -414,16 +414,16 @@ seccion4_titulo.pack(anchor="w", padx=20, pady=10)
 descripcion = tk.Label(instrucciones_frame, text="Esta sección describe el proceso y el método utilizado por el programa para calcular la inversa de matrices cuadradas, detallando cómo el algoritmo implementado opera para obtener el resultado.",
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion.pack(anchor="w", padx=20, pady=5)
-seccion4_contenido = ttk.Label(instrucciones_frame, text="""6.1. Ingreso del Tamaño de la Matriz
+seccion4_contenido = ttk.Label(instrucciones_frame, text="""5.1. Ingreso del Tamaño de la Matriz
 El usuario comienza ingresando el tamaño de la matriz. El tamaño debe ser mayor que 1, ya que las matrices de dimensión 1x1 no se pueden invertir de manera práctica. El programa valida que el tamaño ingresado sea correcto y que se pueda crear una matriz con ese valor.
 
-6.2. Generación de la Matriz
+5.2. Generación de la Matriz
 Después de ingresar el tamaño, el programa genera un conjunto de campos de entrada donde el usuario puede ingresar cada elemento de la matriz manualmente. Los valores deben ser numéricos, y no se permiten valores complejos. Si el valor ingresado es menor que 0.00001, se establece automáticamente en 0.0000. Esto evita errores en el cálculo y garantiza una mayor estabilidad en el procesamiento.
 
-6.3. Verificación del Determinante
+5.3. Verificación del Determinante
 El cálculo de la inversa depende del determinante de la matriz. Si el determinante es 0, la matriz no tiene inversa. El programa realiza esta verificación antes de continuar con los cálculos.
 
-6.4. Método de Gauss-Jordan
+5.4. Método de Gauss-Jordan
 Si la matriz es invertible, el programa aplica el método de Gauss-Jordan. Este método consiste en formar una matriz extendida [A | I], donde A es la matriz ingresada e I es la matriz identidad del mismo tamaño. Los pasos son los siguientes:
 
 ---Selección del Pivote: Se elige el elemento de mayor valor absoluto en la columna actual como pivote. Si es necesario, se intercambian filas para colocar el mejor pivote en la posición correcta.
@@ -434,7 +434,7 @@ Si la matriz es invertible, el programa aplica el método de Gauss-Jordan. Este 
 
 ---Repetición: Estos pasos se repiten para cada columna hasta que la matriz A se convierte en la matriz identidad, y I se transforma en A^-1, que es la inversa de la matriz original.
 
-6.5. Presentación de Resultados
+5.5. Presentación de Resultados
 Una vez que se encuentra la inversa, se muestra al usuario en la interfaz especificamente en la pestaña 'pasos'. El programa resalta cada paso, incluyendo los intercambios de filas y las operaciones realizadas, facilitando la comprensión del proceso de cálculo.
  
 """, wraplength=800, justify="left", font=("Arial", 12))

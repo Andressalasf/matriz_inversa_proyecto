@@ -1,0 +1,147 @@
+
+Documentación del Programa - Calculadora de Matriz Inversa con Método Gauss-Jordan
+
+1. Modelo Matemático - Inversa por Método Gauss-Jordan
+El método Gauss-Jordan es una técnica utilizada para encontrar la inversa de una matriz AAA. El proceso implica convertir la matriz AAA en la matriz identidad III utilizando operaciones elementales de fila, y aplicar las mismas operaciones a la matriz identidad para transformarla en la inversa A−1A^{-1}A−1.
+El proceso matemático consta de los siguientes pasos:
+Se forma una matriz extendida [A∣I][A | I][A∣I], donde AAA es la matriz original y III es la matriz identidad de igual dimensión.
+Se aplica la reducción por filas para llevar AAA a la forma de la matriz identidad III.
+Las mismas operaciones que se aplican a AAA se aplican a III, transformando III en A−1A^{-1}A−1.
+Al final del proceso, la matriz extendida se verá como [I∣A−1][I | A^{-1}][I∣A−1], y la parte derecha será la inversa de la matriz original.
+Este proceso está implementado en la función gauss_jordan_inversa, que muestra los pasos intermedios para que el usuario siga el desarrollo del cálculo.
+________________________________________
+
+2. Implementación del Método en el Programa
+El programa implementa el método de Gauss-Jordan paso a paso en la función gauss_jordan_inversa. Los datos de entrada son una matriz cuadrada n×n introducida por el usuario, que puede contener números decimales o fracciones. El resultado es la matriz inversa, siempre y cuando exista, junto con una visualización detallada del proceso.
+Datos de entrada: Matriz cuadrada de tamaño n×n introducida por el usuario.
+Datos de salida: Matriz inversa A−1A^{-1}A−1 en formato numérico con cuatro decimales de precisión, y un registro de los pasos intermedios del cálculo.
+________________________________________
+
+3. Componentes del Programa
+3.1. Importación de Bibliotecas
+    •	tkinter: Biblioteca de Python para crear interfaces gráficas de usuario (GUI).
+        o	tk: La base de la biblioteca para crear ventanas, botones, etiquetas, etc.
+        o	ttk: Módulo que contiene elementos adicionales de la interfaz gráfica con estilo.
+        o	messagebox: Permite mostrar cuadros de diálogo para mostrar errores o información al usuario.
+    •	numpy (np): Biblioteca para manejo de matrices y operaciones matemáticas complejas como álgebra lineal.
+        o	Se utiliza en este programa para realizar cálculos con matrices de forma eficiente.
+    •	fractions (Fraction): Proporciona la capacidad de manejar fracciones.
+        o	Se utiliza para convertir entradas de fracciones a números decimales en la matriz.
+    •	PIL (ImageTk, Image): Biblioteca para la manipulación de imágenes.
+        o	En este caso, se utiliza para cargar y mostrar imágenes dentro de la interfaz gráfica.
+________________________________________
+
+3.2. Funciones del Programa
+3.2.1. gauss_jordan_inversa (matriz, pasos_frame)
+Esta es la función clave que implementa el método Gauss-Jordan para calcular la inversa de una matriz.
+    •	Entrada:
+        o	matriz: Matriz ingresada por el usuario.
+        o	pasos_frame: Frame donde se mostrarán los pasos intermedios.
+    •	Proceso:
+        1.	Se construye la matriz aumentada [A∣I][A | I][A∣I].
+        2.	Se verifica el pivote para que no sea cero, de serlo se intercambias filas para encontrar un mejor pivote.
+        3.	Se aplica la eliminación Gaussiana para convertir la matriz original en la matriz identidad, mientras que la parte extendida se convierte en la inversa.
+        4.	En cada paso, se muestran las operaciones realizadas (intercambio de filas, normalización de filas, y eliminación de elementos no deseados en las columnas).
+    •	Salida:
+        o	La matriz inversa, en caso de existir. Si no es invertible (determinante cero), se muestra un error.
+________________________________________
+
+3.2.2. mostrar_matriz (pasos_frame, mensaje, matriz)
+Muestra las matrices en los pasos intermedios del método de Gauss-Jordan.
+    •	Entrada:
+        o	pasos_frame: Donde se mostrará la matriz.
+        o	mensaje: Mensaje explicativo de cada paso.
+        o	matriz: La matriz en su estado actual durante el proceso de eliminación.
+    •	Proceso:
+        1.	Formatea y muestra la matriz en el cuadro de texto adecuado.
+        2.	Acompaña el mensaje descriptivo para que el usuario entienda el paso realizado.
+________________________________________
+
+3.2.3. calcular_inversa ()
+Realiza la verificación inicial de que la matriz ingresada es válida para calcular su inversa.
+    •	Entrada:
+        o	Los valores de la matriz ingresados por el usuario.
+    •	Proceso:
+        1.	Convierte la entrada a un array de numpy.
+        2.	Verifica que el determinante sea diferente de cero.
+        3.	Si tiene inversa, llama a la función gauss_jordan_inversa para proceder.
+    •	Salida:
+        o	La matriz inversa o un mensaje de error si no existe.
+
+3.2.4. generar_entradas ()
+Genera un conjunto de entradas (widgets) que permiten al usuario introducir los elementos de la matriz de tamaño especificado por el usuario.
+
+3.2.5	limpiar ()
+Limpia todos los datos ingresados por el usuario y reinicia la interfaz, ocultando los botones y cuadros de texto.
+
+3.2.6. mostrar_pasos ()
+	Muestra los pasos de la solución en una pestaña separada dentro de la interfaz gráfica.
+
+3.2.7. volver_inicio ()
+Regresa a la pestaña principal desde la pestaña de pasos.
+
+3.2.8. ver_manual ()
+Muestra el manual de usuario en una pestaña aparte dentro de la interfaz gráfica.
+
+_____________________________________
+
+3.3. Datos de Entrada y Salida
+    •	Entrada:
+        o	El usuario debe ingresar los elementos de la matriz cuadrada a través de campos de texto en la interfaz gráfica. El programa admite matrices de hasta 5×55 \times 55×5.
+    •	Salida:
+        o	Si la matriz tiene inversa, se muestra la matriz inversa con todos los pasos intermedios del proceso de eliminación Gauss-Jordan.
+        o	Si la matriz no tiene inversa (determinante cero), se muestra un mensaje de error indicando que no es posible calcular la inversa.
+________________________________________
+
+4. Estructura de la Interfaz
+La interfaz de usuario de la calculadora de matriz inversa está diseñada utilizando la biblioteca tkinter de Python, y presenta un diseño intuitivo y funcional. La interfaz principal se compone de varias pestañas, cada una de las cuales proporciona funcionalidades específicas para el usuario.
+
+4.1. Pestañas de la Interfaz
+
+4.1.1. Pestaña Principal
+Descripción: Esta es la pestaña inicial donde el usuario puede ingresar los elementos de la matriz y realizar el cálculo de la matriz inversa.
+Componentes:
+Entrada de Matriz: Campos de texto donde el usuario puede ingresar los elementos de la matriz.
+
+Botón "Calcular Inversa": Al hacer clic, este botón inicia el proceso de cálculo de la inversa de la matriz ingresada.
+
+Botón "Limpiar": Restablece todos los campos de entrada a su estado original.
+
+Botón "Ver Manual": Abre una pestaña separada con el manual de usuario para guiar al usuario en el uso de la aplicación.
+
+4.1.2. Pestaña de Pasos
+Descripción: Esta pestaña muestra el procedimiento detallado del cálculo de la matriz inversa utilizando el método de Gauss-Jordan.
+Componentes:
+Frame de Pasos: Área donde se mostrarán las matrices y las operaciones realizadas en cada paso del proceso.
+Botón "Volver a Inicio": Permite al usuario regresar a la pestaña principal para realizar nuevos cálculos.
+
+4.1.3. Pestaña de Manual
+Descripción: Ofrece una guía detallada sobre cómo usar la calculadora, incluyendo ejemplos y explicaciones sobre la metodología del cálculo de la inversa de matrices.
+Componentes:
+Texto de Manual: Contiene la información relevante sobre el uso del programa, incluidas las restricciones y ejemplos prácticos.
+
+Botón "Regresar": Permite al usuario regresar a la pestaña principal.
+
+4.2. Diseño Visual
+Colores: Se utiliza un esquema de color atractivo, con un fondo oscuro y texto claro para mejorar la legibilidad.
+
+Fuente: La tipografía es clara y legible, adecuada para la visualización en diferentes tamaños de pantalla.
+
+Disposición: Los elementos están organizados de manera lógica para guiar al usuario a través del proceso de cálculo de manera intuitiva.
+
+4.3. Navegación entre Pestañas
+La navegación entre pestañas se gestiona utilizando el widget Notebook de ttk, que permite a los usuarios cambiar fácilmente de una pestaña a otra. Los botones de navegación (como "Volver a Inicio" y "Regresar") están diseñados para proporcionar una experiencia de usuario fluida.
+________________________________________
+
+5. Excepciones y manejo de errores
+El programa incluye manejo de errores para asegurar una experiencia sin fallos. Si el usuario introduce datos inválidos, el programa mostrará un cuadro de diálogo con un mensaje de error, indicando qué entrada necesita corregirse. Además, si la matriz no tiene inversa, se informa de ello de forma clara.
+•	Errores cubiertos:
+    o	Entrada de valores no numéricos.
+    o	Intento de calcular la inversa de una matriz no cuadrada.
+    o	Intento de calcular la inversa de una matriz con determinante igual a cero.
+________________________________________
+
+6. Restricciones y Limitaciones del Programa
+    •	Precisión Decimal: El programa está diseñado para mostrar los resultados con una precisión de hasta 4 decimales. Cualquier número menor a 0.0001 se redondeará a 0. Esto asegura una representación más limpia y manejable de los resultados, pero puede afectar la precisión en ciertos casos.
+    •	Matrices No Inversibles: Si la matriz ingresada no tiene inversa (es decir, su determinante es cero), el programa mostrará un mensaje de error indicando que la matriz no es inversible.
+    •	Tamaño de la Matriz: El tamaño máximo de la matriz permitido está determinado por la capacidad de la interfaz gráfica y el rendimiento del sistema. Se recomienda un tamaño máximo de n×n, donde,  n≤10, para mantener un rendimiento óptimo.

@@ -1,6 +1,6 @@
 # Calculadora de Matriz Inversa: Método Gauss-Jordan 🔢
 
-**Andrés Felipe Salas Niño**
+**Andrés Felipe Salas Niño - 192164**
 
 ## Descripción del Proyecto 👀
 Este proyecto consiste en una calculadora que utiliza el método de Gauss-Jordan para encontrar la matriz inversa de una matriz dada. La calculadora muestra el proceso paso a paso, incluyendo el pivoteo parcial, que garantiza mayor estabilidad numérica al intercambiar filas para evitar divisiones por valores cercanos a cero. La aplicación cuenta con una interfaz gráfica amigable implementada con Tkinter, y presenta los resultados y cada operación realizada de forma clara y detallada.

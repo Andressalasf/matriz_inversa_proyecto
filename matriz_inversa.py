@@ -6,7 +6,6 @@ import numpy as np  # Biblioteca para manejo de matrices y operaciones numérica
 from fractions import Fraction  # Para manejar fracciones en las entradas de la matriz
 from PIL import ImageTk, Image
 
-
 # ------------------------------------------------- Codigo de las funciones del programa ---------------------------------------------------- #
 
 # Función para calcular la matriz inversa utilizando el método Gauss-Jordan
@@ -23,9 +22,15 @@ def gauss_jordan_inversa(matriz, pasos_frame):
         if max_index != i:  # Si el pivote máximo no está en la fila actual, intercambiar filas
             matriz_extendida[[i, max_index]] = matriz_extendida[[max_index, i]]
             mostrar_matriz(pasos_frame, f"Intercambio de fila {i + 1} con fila {max_index + 1} por mejor pivote", matriz_extendida)
-
+    
         # Normalizar la fila actual dividiéndola por el valor del pivote
         pivote = matriz_extendida[i][i]
+        
+         # Verificar si el pivote es cero o cercano a cero, lo que indica que no se puede continuar
+        if np.isclose(pivote, 0):  # Usar isclose para evitar problemas de precisión flotante
+            messagebox.showerror("Error",f"El pivote en la fila {i + 1} es cero o muy cercano a cero. La matriz es singular y no tiene inversa.") 
+            return None
+        
         matriz_extendida[i] = matriz_extendida[i] / pivote
         mostrar_matriz(pasos_frame, f"Dividiendo fila {i + 1} por el pivote {pivote:.4f}", matriz_extendida)
 
@@ -61,6 +66,8 @@ def mostrar_matriz(pasos_frame, mensaje, matriz):
                                       borderwidth=2, relief="groove", bg='#e0e1dd', fg='#1b263b', padx=5, pady=5)
             label_elemento.grid(row=start_row + i + 1, column=j, padx=5, pady=5)
 
+import numpy as np  # Importar numpy para constantes y funciones matemáticas
+
 # Función para calcular la inversa de la matriz
 def calcular_inversa():
     try:
@@ -71,14 +78,24 @@ def calcular_inversa():
             fila = []
             for j in range(n):
                 valor = entradas[i][j].get()  # Obtener el valor de cada celda
-                if '/' in valor:  # Si el valor es una fracción, convertirlo a decimal
+                
+                # Verificar si el valor es una constante especial o una expresión
+                if 'pi' in valor:
+                    valor = np.pi  # Reemplazar "pi" por el valor de pi
+                elif 'e' in valor:
+                    valor = np.e  # Reemplazar "e" por el valor de Euler
+                elif 'sqrt' in valor:  # Verificar si se desea calcular una raíz cuadrada
+                    valor = valor.replace('sqrt(', '').replace(')', '')  # Extraer el número dentro de la raíz
+                    valor = np.sqrt(float(valor))  # Calcular la raíz cuadrada
+                elif '/' in valor:  # Si el valor es una fracción, convertirlo a decimal
                     valor = float(Fraction(valor))
                 else:
-                    valor = float(valor)  # Convertir el valor a flotante
+                    valor = float(valor)  # Convertir el valor a flotante si es un número regular
+                
                 fila.append(valor)  # Añadir el valor a la fila
             matriz.append(fila)  # Añadir la fila a la matriz
 
-        matriz = np.array(matriz)  # Convertir la lista de listas en un array de numpy
+        matriz = np.array(matriz) # Convertir la lista de listas en un array de numpy
 
         for widget in pasos_frame.winfo_children():  # Limpiar los pasos anteriores en la interfaz
             widget.destroy()
@@ -341,7 +358,7 @@ label_instruccion3 = tk.Label(instrucciones_frame, text="Paso 3: Ingresar los va
 label_instruccion3.pack(anchor="w", padx=20, pady=5)
 
 descripcion_instruccion3 = tk.Label(instrucciones_frame, text="Ingrese los valores de la matriz en los campos correspondientes. "
-                                                              "Recuerde que los valores deben ser mayores a 0.00001 para evitar que sean redondeados a 0.",
+                                                              "Recuerde que los valores deben ser mayores a 0.00001 para evitar que sean redondeados a 0. ademas de que se permite el ingreso de valores como pi ingresando 'pi', euler ingresando 'e' y raiz ingresando 'sqrt(valor)'",
                                     font=("Arial", 12), bg='#f8f9fa', fg='#1b263b', justify="left", wraplength=700)
 descripcion_instruccion3.pack(anchor="w", padx=20, pady=5)
 

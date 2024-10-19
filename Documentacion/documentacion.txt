@@ -87,7 +87,8 @@ _____________________________________
 
 3.3. Datos de Entrada y Salida
     •	Entrada:
-        o	El usuario debe ingresar los elementos de la matriz cuadrada a través de campos de texto en la interfaz gráfica. El programa admite matrices de hasta 5×55 \times 55×5.
+        o	El usuario debe ingresar los elementos de la matriz cuadrada a través de campos de texto en la interfaz gráfica. El programa admite matrices de hasta 5×5
+        o   Los datos para llenar la matriz puedes ser numeros enteros positivos y negativos, ademas de el numero 'pi' ingresando textualmente 'pi', euler ingresando 'e' y raiz ingresando 'sqrt(valor a ingresar en la raiz)'
     •	Salida:
         o	Si la matriz tiene inversa, se muestra la matriz inversa con todos los pasos intermedios del proceso de eliminación Gauss-Jordan.
         o	Si la matriz no tiene inversa (determinante cero), se muestra un mensaje de error indicando que no es posible calcular la inversa.

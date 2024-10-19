@@ -9,7 +9,7 @@ Algoritmo calcularMatrizInversa
     matriz = generarEntradas() // Generar las entradas de la matriz
     n = dimension(matriz) // Tamaño de la matriz (n x n)
     identidad = crearMatrizIdentidad(n) // Crear la matriz identidad
-    matrizExtendida = unirMatrices(matriz, identidad) // Concatenar matriz con identidad
+    matrizExtendida = unirMatrices(matriz, identidad) // Con  catenar matriz con identidad
     
     Para i Desde 0 Hasta n-1 Hacer
         pivote = matrizExtendida[i][i]
